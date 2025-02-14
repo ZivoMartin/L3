@@ -1,0 +1,7 @@
+(ocamllex
+ (modules Lexer))
+
+(executable
+ (public_name calculette_lexer)
+ (name main)
+ (package td_lexer))

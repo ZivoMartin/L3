@@ -17,12 +17,17 @@ public class ImageDao implements Dao<Image> {
   private final Map<Long, Image> images = new HashMap<>();
 
   public ImageDao() {
-    final ClassPathResource imgFile = new ClassPathResource("test.jpg");
-    byte[] fileContent;
+    final ClassPathResource imgFile1 = new ClassPathResource("logo.jpg");
+	final ClassPathResource imgFile2 = new ClassPathResource("zig.jpg");
+    byte[] fileContent1;
+	byte[] fileContent2;
     try {
-      fileContent = Files.readAllBytes(imgFile.getFile().toPath());
-      Image img = new Image("logo.jpg", fileContent);
-      images.put(img.getId(), img);
+      fileContent1 = Files.readAllBytes(imgFile1.getFile().toPath());
+	  fileContent2 = Files.readAllBytes(imgFile2.getFile().toPath());
+	  Image img1 = new Image("logo.jpg", fileContent1);
+	  Image img2 = new Image("zig.jpg", fileContent2);
+      images.put(img1.getId(), img1);
+	  images.put(img2.getId(), img2);
     } catch (final IOException e) {
       e.printStackTrace();
     }

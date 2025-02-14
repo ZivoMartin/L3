@@ -1,0 +1,4 @@
+(executable
+ (public_name hand_lexer)
+ (name main)
+ (package td_lexer))

@@ -1,0 +1,194 @@
+(lang dune 3.17)
+(name compiler)
+(sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/compiler))
+(files
+ (lib
+  (META
+   __private__/abstract_machine/.public_cmi/abstract_machine.cmi
+   __private__/abstract_machine/.public_cmi/abstract_machine.cmt
+   __private__/abstract_machine/.public_cmi/abstract_machine.cmti
+   __private__/abstract_machine/abstract_machine.a
+   __private__/abstract_machine/abstract_machine.cma
+   __private__/abstract_machine/abstract_machine.cmx
+   __private__/abstract_machine/abstract_machine.cmxa
+   __private__/abstract_machine/abstract_machine.ml
+   __private__/abstract_machine/abstract_machine.mli
+   __private__/course_language/.public_cmi/course_language.cmi
+   __private__/course_language/.public_cmi/course_language.cmt
+   __private__/course_language/.public_cmi/course_language__Ast.cmi
+   __private__/course_language/.public_cmi/course_language__Ast.cmt
+   __private__/course_language/.public_cmi/course_language__Ast.cmti
+   __private__/course_language/.public_cmi/course_language__Interpreter.cmi
+   __private__/course_language/.public_cmi/course_language__Interpreter.cmt
+   __private__/course_language/.public_cmi/course_language__Interpreter.cmti
+   __private__/course_language/ast.ml
+   __private__/course_language/ast.mli
+   __private__/course_language/course_language.a
+   __private__/course_language/course_language.cma
+   __private__/course_language/course_language.cmx
+   __private__/course_language/course_language.cmxa
+   __private__/course_language/course_language.ml
+   __private__/course_language/course_language__Ast.cmx
+   __private__/course_language/course_language__Interpreter.cmx
+   __private__/course_language/interpreter.ml
+   __private__/course_language/interpreter.mli
+   __private__/three_address/.public_cmi/three_address.cmi
+   __private__/three_address/.public_cmi/three_address.cmt
+   __private__/three_address/three_address.a
+   __private__/three_address/three_address.cma
+   __private__/three_address/three_address.cmx
+   __private__/three_address/three_address.cmxa
+   __private__/three_address/three_address.ml
+   __private__/util/.public_cmi/util.cmi
+   __private__/util/.public_cmi/util.cmt
+   __private__/util/.public_cmi/util__Environment.cmi
+   __private__/util/.public_cmi/util__Environment.cmt
+   __private__/util/.public_cmi/util__Environment.cmti
+   __private__/util/.public_cmi/util__Position.cmi
+   __private__/util/.public_cmi/util__Position.cmt
+   __private__/util/environment.ml
+   __private__/util/environment.mli
+   __private__/util/position.ml
+   __private__/util/util.a
+   __private__/util/util.cma
+   __private__/util/util.cmx
+   __private__/util/util.cmxa
+   __private__/util/util.ml
+   __private__/util/util__Environment.cmx
+   __private__/util/util__Position.cmx
+   dune-package
+   opam))
+ (libexec
+  (__private__/abstract_machine/abstract_machine.cmxs
+   __private__/course_language/course_language.cmxs
+   __private__/three_address/three_address.cmxs
+   __private__/util/util.cmxs))
+ (bin (ast_interpreter))
+ (doc (odoc-pages/index.mld)))
+(library
+ (name compiler.__private__.abstract_machine)
+ (kind normal)
+ (archives
+  (byte __private__/abstract_machine/abstract_machine.cma)
+  (native __private__/abstract_machine/abstract_machine.cmxa))
+ (plugins
+  (byte __private__/abstract_machine/abstract_machine.cma)
+  (native __private__/abstract_machine/abstract_machine.cmxs))
+ (native_archives __private__/abstract_machine/abstract_machine.a)
+ (requires compiler.__private__.util)
+ (main_module_name Abstract_machine)
+ (modes byte native)
+ (obj_dir
+  (public_cmi_ocaml_dir .public_cmi)
+  (public_cmi_melange_dir melange/.public_cmi_melange))
+ (modules
+  (singleton
+   (obj_name abstract_machine)
+   (visibility public)
+   (source
+    (path Abstract_machine)
+    (intf (path __private__/abstract_machine/abstract_machine.mli))
+    (impl (path __private__/abstract_machine/abstract_machine.ml))))))
+(library
+ (name compiler.__private__.course_language)
+ (kind normal)
+ (archives
+  (byte __private__/course_language/course_language.cma)
+  (native __private__/course_language/course_language.cmxa))
+ (plugins
+  (byte __private__/course_language/course_language.cma)
+  (native __private__/course_language/course_language.cmxs))
+ (native_archives __private__/course_language/course_language.a)
+ (requires compiler.__private__.util compiler.__private__.abstract_machine)
+ (main_module_name Course_language)
+ (modes byte native)
+ (obj_dir
+  (public_cmi_ocaml_dir .public_cmi)
+  (public_cmi_melange_dir melange/.public_cmi_melange))
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name course_language)
+     (visibility public)
+     (kind alias)
+     (source
+      (path Course_language)
+      (impl (path __private__/course_language/course_language.ml-gen))))
+    (name Course_language)
+    (modules
+     (module
+      (obj_name course_language__Ast)
+      (visibility public)
+      (source
+       (path Ast)
+       (intf (path __private__/course_language/ast.mli))
+       (impl (path __private__/course_language/ast.ml))))
+     (module
+      (obj_name course_language__Interpreter)
+      (visibility public)
+      (source
+       (path Interpreter)
+       (intf (path __private__/course_language/interpreter.mli))
+       (impl (path __private__/course_language/interpreter.ml))))))
+   (wrapped true))))
+(library
+ (name compiler.__private__.three_address)
+ (kind normal)
+ (archives
+  (byte __private__/three_address/three_address.cma)
+  (native __private__/three_address/three_address.cmxa))
+ (plugins
+  (byte __private__/three_address/three_address.cma)
+  (native __private__/three_address/three_address.cmxs))
+ (native_archives __private__/three_address/three_address.a)
+ (main_module_name Three_address)
+ (modes byte native)
+ (obj_dir
+  (public_cmi_ocaml_dir .public_cmi)
+  (public_cmi_melange_dir melange/.public_cmi_melange))
+ (modules
+  (singleton
+   (obj_name three_address)
+   (visibility public)
+   (source
+    (path Three_address)
+    (impl (path __private__/three_address/three_address.ml))))))
+(library
+ (name compiler.__private__.util)
+ (kind normal)
+ (archives
+  (byte __private__/util/util.cma)
+  (native __private__/util/util.cmxa))
+ (plugins
+  (byte __private__/util/util.cma)
+  (native __private__/util/util.cmxs))
+ (native_archives __private__/util/util.a)
+ (requires menhirLib)
+ (main_module_name Util)
+ (modes byte native)
+ (obj_dir
+  (public_cmi_ocaml_dir .public_cmi)
+  (public_cmi_melange_dir melange/.public_cmi_melange))
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name util)
+     (visibility public)
+     (kind alias)
+     (source (path Util) (impl (path __private__/util/util.ml-gen))))
+    (name Util)
+    (modules
+     (module
+      (obj_name util__Environment)
+      (visibility public)
+      (source
+       (path Environment)
+       (intf (path __private__/util/environment.mli))
+       (impl (path __private__/util/environment.ml))))
+     (module
+      (obj_name util__Position)
+      (visibility public)
+      (source (path Position) (impl (path __private__/util/position.ml))))))
+   (wrapped true))))

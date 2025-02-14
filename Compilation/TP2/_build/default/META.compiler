@@ -1,0 +1,40 @@
+package "__private__" (
+  directory = "__private__"
+  package "abstract_machine" (
+    directory = "abstract_machine"
+    description = ""
+    requires = "compiler.__private__.util"
+    archive(byte) = "abstract_machine.cma"
+    archive(native) = "abstract_machine.cmxa"
+    plugin(byte) = "abstract_machine.cma"
+    plugin(native) = "abstract_machine.cmxs"
+  )
+  package "course_language" (
+    directory = "course_language"
+    description = ""
+    requires =
+    "compiler.__private__.abstract_machine compiler.__private__.util"
+    archive(byte) = "course_language.cma"
+    archive(native) = "course_language.cmxa"
+    plugin(byte) = "course_language.cma"
+    plugin(native) = "course_language.cmxs"
+  )
+  package "three_address" (
+    directory = "three_address"
+    description = ""
+    requires = ""
+    archive(byte) = "three_address.cma"
+    archive(native) = "three_address.cmxa"
+    plugin(byte) = "three_address.cma"
+    plugin(native) = "three_address.cmxs"
+  )
+  package "util" (
+    directory = "util"
+    description = ""
+    requires = "menhirLib"
+    archive(byte) = "util.cma"
+    archive(native) = "util.cmxa"
+    plugin(byte) = "util.cma"
+    plugin(native) = "util.cmxs"
+  )
+)

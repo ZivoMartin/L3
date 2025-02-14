@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name program_lexer)
+ (package compiler)
+ (libraries course_language cairn))

@@ -1,0 +1,13 @@
+(ocamllex
+ (modules
+  Subject_lexer
+  Ab_star_lexer
+  Even_odd_lexer
+  Arith_lexer
+  Decode_lexer
+  Custom_lexer))
+
+(executable
+ (public_name simple_lexer)
+ (name main)
+ (package td_lexer))

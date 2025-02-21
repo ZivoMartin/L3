@@ -1,0 +1,5 @@
+(executable
+ (public_name serialiser)
+ (name main)
+ (package td_lexer)
+ (libraries course_language))
